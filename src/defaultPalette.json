@@ -1,418 +1,262 @@
-[
-    {
-        "id": "HardenedClay",
-        "color": {
-            "r": 150,
-            "g": 92,
-            "b": 66
-        }
+{
+    "HardenedClay": {
+        "r": 150,
+        "g": 92,
+        "b": 66
     },
-    {
-        "id": "WhiteClay",
-        "color": {
-            "r": 209,
-            "g": 178,
-            "b": 161
-        }
+    "WhiteClay": {
+        "r": 209,
+        "g": 178,
+        "b": 161
     },
-    {
-        "id": "OrangeClay",
-        "color": {
-            "r": 161,
-            "g": 83,
-            "b": 37
-        }
+    "OrangeClay": {
+        "r": 161,
+        "g": 83,
+        "b": 37
     },
-    {
-        "id": "MagentaClay",
-        "color": {
-            "r": 149,
-            "g": 88,
-            "b": 108
-        }
+    "MagentaClay": {
+        "r": 149,
+        "g": 88,
+        "b": 108
     },
-    {
-        "id": "LightBlueClay",
-        "color": {
-            "r": 113,
-            "g": 108,
-            "b": 137
-        }
+    "LightBlueClay": {
+        "r": 113,
+        "g": 108,
+        "b": 137
     },
-    {
-        "id": "YellowClay",
-        "color": {
-            "r": 186,
-            "g": 133,
-            "b": 35
-        }
+    "YellowClay": {
+        "r": 186,
+        "g": 133,
+        "b": 35
     },
-    {
-        "id": "LimeClay",
-        "color": {
-            "r": 103,
-            "g": 117,
-            "b": 52
-        }
+    "LimeClay": {
+        "r": 103,
+        "g": 117,
+        "b": 52
     },
-    {
-        "id": "PinkClay",
-        "color": {
-            "r": 161,
-            "g": 78,
-            "b": 78
-        }
+    "PinkClay": {
+        "r": 161,
+        "g": 78,
+        "b": 78
     },
-    {
-        "id": "GreyClay",
-        "color": {
-            "r": 57,
-            "g": 42,
-            "b": 35
-        }
+    "GreyClay": {
+        "r": 57,
+        "g": 42,
+        "b": 35
     },
-    {
-        "id": "LightGreyClay",
-        "color": {
-            "r": 135,
-            "g": 106,
-            "b": 97
-        }
+    "LightGreyClay": {
+        "r": 135,
+        "g": 106,
+        "b": 97
     },
-    {
-        "id": "CyanClay",
-        "color": {
-            "r": 86,
-            "g": 91,
-            "b": 91
-        }
+    "CyanClay": {
+        "r": 86,
+        "g": 91,
+        "b": 91
     },
-    {
-        "id": "PurpleClay",
-        "color": {
-            "r": 118,
-            "g": 70,
-            "b": 86
-        }
+    "PurpleClay": {
+        "r": 118,
+        "g": 70,
+        "b": 86
     },
-    {
-        "id": "BlueClay",
-        "color": {
-            "r": 74,
-            "g": 59,
-            "b": 91
-        }
+    "BlueClay": {
+        "r": 74,
+        "g": 59,
+        "b": 91
     },
-    {
-        "id": "BrownClay",
-        "color": {
-            "r": 77,
-            "g": 51,
-            "b": 35
-        }
+    "BrownClay": {
+        "r": 77,
+        "g": 51,
+        "b": 35
     },
-    {
-        "id": "GreenClay",
-        "color": {
-            "r": 76,
-            "g": 83,
-            "b": 42
-        }
+    "GreenClay": {
+        "r": 76,
+        "g": 83,
+        "b": 42
     },
-    {
-        "id": "RedClay",
-        "color": {
-            "r": 143,
-            "g": 61,
-            "b": 46
-        }
+    "RedClay": {
+        "r": 143,
+        "g": 61,
+        "b": 46
     },
-    {
-        "id": "BlackClay",
-        "color": {
-            "r": 37,
-            "g": 22,
-            "b": 16
-        }
+    "BlackClay": {
+        "r": 37,
+        "g": 22,
+        "b": 16
     },
-    {
-        "id": "Sand",
-        "color": {
-            "r": 219,
-            "g": 211,
-            "b": 160
-        }
+    "Sand": {
+        "r": 219,
+        "g": 211,
+        "b": 160
     },
-    {
-        "id": "RedSand",
-        "color": {
-            "r": 169,
-            "g": 88,
-            "b": 33
-        }
+    "RedSand": {
+        "r": 169,
+        "g": 88,
+        "b": 33
     },
-    {
-        "id": "Sandstone",
-        "color": {
-            "r": 218,
-            "g": 210,
-            "b": 158
-        }
+    "Sandstone": {
+        "r": 218,
+        "g": 210,
+        "b": 158
     },
-    {
-        "id": "RedSandstone",
-        "color": {
-            "r": 166,
-            "g": 85,
-            "b": 29
-        }
+    "RedSandstone": {
+        "r": 166,
+        "g": 85,
+        "b": 29
     },
-    {
-        "id": "Cobblestone",
-        "color": {
-            "r": 122,
-            "g": 122,
-            "b": 122
-        }
+    "Cobblestone": {
+        "r": 122,
+        "g": 122,
+        "b": 122
     },
-    {
-        "id": "MossyCobblestone",
-        "color": {
-            "r": 103,
-            "g": 121,
-            "b": 103
-        }
+    "MossyCobblestone": {
+        "r": 103,
+        "g": 121,
+        "b": 103
     },
-    {
-        "id": "Obsidian",
-        "color": {
-            "r": 20,
-            "g": 18,
-            "b": 29
-        }
+    "Obsidian": {
+        "r": 20,
+        "g": 18,
+        "b": 29
     },
-    {
-        "id": "Bedrock",
-        "color": {
-            "r": 83,
-            "g": 83,
-            "b": 83
-        }
+    "Bedrock": {
+        "r": 83,
+        "g": 83,
+        "b": 83
     },
-    {
-        "id": "Soul_Soil",
-        "color": {
-            "r": 76,
-            "g": 58,
-            "b": 47
-        }
+    "Soul_Soil": {
+        "r": 76,
+        "g": 58,
+        "b": 47
     },
-    {
-        "id": "Mycelium",
-        "color": {
-            "r": 111,
-            "g": 99,
-            "b": 105
-        }
+    "Mycelium": {
+        "r": 111,
+        "g": 99,
+        "b": 105
     },
-    {
-        "id": "EndStone",
-        "color": {
-            "r": 221,
-            "g": 223,
-            "b": 165
-        }
+    "EndStone": {
+        "r": 221,
+        "g": 223,
+        "b": 165
     },
-    {
-        "id": "BareGrass",
-        "color": {
-            "r": 69,
-            "g": 110,
-            "b": 51
-        }
+    "BareGrass": {
+        "r": 69,
+        "g": 110,
+        "b": 51
     },
-    {
-        "id": "Permadirt",
-        "color": {
-            "r": 134,
-            "g": 96,
-            "b": 67
-        }
+    "Permadirt": {
+        "r": 134,
+        "g": 96,
+        "b": 67
     },
-    {
-        "id": "Podzol",
-        "color": {
-            "r": 90,
-            "g": 63,
-            "b": 28
-        }
+    "Podzol": {
+        "r": 90,
+        "g": 63,
+        "b": 28
     },
-    {
-        "id": "Stone",
-        "color": {
-            "r": 125,
-            "g": 125,
-            "b": 125
-        }
+    "Stone": {
+        "r": 125,
+        "g": 125,
+        "b": 125
     },
-    {
-        "id": "Water",
-        "color": {
-            "r": 47,
-            "g": 67,
-            "b": 244
-        }
+    "Water": {
+        "r": 47,
+        "g": 67,
+        "b": 244
     },
-    {
-        "id": "Lava",
-        "color": {
-            "r": 216,
-            "g": 104,
-            "b": 26
-        }
+    "Lava": {
+        "r": 216,
+        "g": 104,
+        "b": 26
     },
-    {
-        "id": "Netherrack",
-        "color": {
-            "r": 111,
-            "g": 54,
-            "b": 52
-        }
+    "Netherrack": {
+        "r": 111,
+        "g": 54,
+        "b": 52
     },
-    {
-        "id": "Warped_Nylium",
-        "color": {
-            "r": 43,
-            "g": 114,
-            "b": 101
-        }
+    "Warped_Nylium": {
+        "r": 43,
+        "g": 114,
+        "b": 101
     },
-    {
-        "id": "Crimson_Nylium",
-        "color": {
-            "r": 131,
-            "g": 31,
-            "b": 31
-        }
+    "Crimson_Nylium": {
+        "r": 131,
+        "g": 31,
+        "b": 31
     },
-    {
-        "id": "Granite",
-        "color": {
-            "r": 153,
-            "g": 113,
-            "b": 98
-        }
+    "Granite": {
+        "r": 153,
+        "g": 113,
+        "b": 98
     },
-    {
-        "id": "DeepSnow",
-        "color": {
-            "r": 239,
-            "g": 251,
-            "b": 251
-        }
+    "DeepSnow": {
+        "r": 239,
+        "g": 251,
+        "b": 251
     },
-    {
-        "id": "GrassPath",
-        "color": {
-            "r": 159,
-            "g": 114,
-            "b": 98
-        }
+    "GrassPath": {
+        "r": 159,
+        "g": 114,
+        "b": 98
     },
-    {
-        "id": "Deepslate",
-        "color": {
-            "r": 80,
-            "g": 80,
-            "b": 83
-        }
+    "Deepslate": {
+        "r": 80,
+        "g": 80,
+        "b": 83
     },
-    {
-        "id": "Blackstone",
-        "color": {
-            "r": 42,
-            "g": 36,
-            "b": 41
-        }
+    "Blackstone": {
+        "r": 42,
+        "g": 36,
+        "b": 41
     },
-    {
-        "id": "SoulSand",
-        "color": {
-            "r": 84,
-            "g": 64,
-            "b": 51
-        }
+    "SoulSand": {
+        "r": 84,
+        "g": 64,
+        "b": 51
     },
-    {
-        "id": "Moss",
-        "color": {
-            "r": 26,
-            "g": 54,
-            "b": 4
-        }
+    "Moss": {
+        "r": 26,
+        "g": 54,
+        "b": 4
     },
-    {
-        "id": "Gravel",
-        "color": {
-            "r": 126,
-            "g": 124,
-            "b": 122
-        }
+    "Gravel": {
+        "r": 126,
+        "g": 124,
+        "b": 122
     },
-    {
-        "id": "Clay",
-        "color": {
-            "r": 158,
-            "g": 164,
-            "b": 176
-        }
+    "Clay": {
+        "r": 158,
+        "g": 164,
+        "b": 176
     },
-    {
-        "id": "Diorite",
-        "color": {
-            "r": 179,
-            "g": 179,
-            "b": 182
-        }
+    "Diorite": {
+        "r": 179,
+        "g": 179,
+        "b": 182
     },
-    {
-        "id": "Andesite",
-        "color": {
-            "r": 130,
-            "g": 131,
-            "b": 131
-        }
+    "Andesite": {
+        "r": 130,
+        "g": 131,
+        "b": 131
     },
-    {
-        "id": "Tuff",
-        "color": {
-            "r": 108,
-            "g": 109,
-            "b": 103
-        }
+    "Tuff": {
+        "r": 108,
+        "g": 109,
+        "b": 103
     },
-    {
-        "id": "Basalt",
-        "color": {
-            "r": 81,
-            "g": 81,
-            "b": 86
-        }
+    "Basalt": {
+        "r": 81,
+        "g": 81,
+        "b": 86
     },
-    {
-        "id": "Calcite",
-        "color": {
-            "r": 223,
-            "g": 224,
-            "b": 221
-        }
+    "Calcite": {
+        "r": 223,
+        "g": 224,
+        "b": 221
     },
-    {
-        "id": "Mud",
-        "color": {
-            "r": 57,
-            "g": 56,
-            "b": 63
-        }
+    "Mud": {
+        "r": 57,
+        "g": 56,
+        "b": 63
     }
-]
+}
