@@ -27,7 +27,8 @@ import FileOpen from "@mui/icons-material/FileOpen";
 import Save from "@mui/icons-material/Save";
 import fileDownload from "js-file-download";
 import {
-    pickFile 
+    pickFile
+// @ts-expect-error js-pick-file don't have types or DefinitelyTyped.
 } from "js-pick-file";
 
 /**
