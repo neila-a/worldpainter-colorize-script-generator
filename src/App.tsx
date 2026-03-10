@@ -23,6 +23,12 @@ import IconButton from "@mui/material/IconButton";
 import Delete from "@mui/icons-material/Delete";
 import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
+import FileOpen from "@mui/icons-material/FileOpen";
+import Save from "@mui/icons-material/Save";
+import fileDownload from "js-file-download";
+import {
+    pickFile 
+} from "js-pick-file";
 
 /**
  * It is an object because sometimes we need to change its ID without changing its color.
@@ -45,7 +51,9 @@ export default function App() {
                 <Paper sx={{
                     p: 1
                 }} elevation={3}>
-                    <FormControl fullWidth>
+                    <FormControl fullWidth sx={{
+                        marginBottom: 1
+                    }}>
                         <InputLabel id="id-select-label">
                             ID
                         </InputLabel>
@@ -64,7 +72,7 @@ export default function App() {
                         buffer[index].color = newColor;
                         return buffer;
                     })} />
-                    <IconButton color="error" onClick={() => setBlocks(oldBlocks => {
+                    <IconButton aria-label="delete" color="error" onClick={() => setBlocks(oldBlocks => {
                         const buffer = oldBlocks.slice();
                         buffer.splice(index, 1);
                         return buffer;
@@ -93,32 +101,46 @@ export default function App() {
             flexShrink: 0,
             "& .MuiDrawer-paper": {
                 width: 250,
-                p: 1,
                 boxSizing: "border-box"
             }
         }} variant="permanent" anchor="right">
-            <ButtonGroup variant="contained" fullWidth>
-                <Button startIcon={<Download />} onClick={() => {
-                    const blob = new Blob([
-                        colorizer.replace("_def_", JSON.stringify(blocks.map(block => [
-                            block.id,
-                            block.color.r,
-                            block.color.g,
-                            block.color.b
-                        ].join(" ")))).replace("_allPossibleBlocks_", JSON.stringify(allPossibleBlocks))
-                    ]);
-                    const objectUrl = URL.createObjectURL(blob);
-                    const link = document.createElement("a");
-                    link.href = objectUrl;
-                    link.download = "colorizer.js";
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    URL.revokeObjectURL(objectUrl); // 清理资源
+            <Box sx={{
+                bottom: "0",
+                position: "fixed",
+                p: 1
+            }}>
+                <ButtonGroup variant="outlined" fullWidth sx={{
+                    marginBottom: 1
                 }}>
-                    下载脚本
-                </Button>
-            </ButtonGroup>
+                    <Button startIcon={<FileOpen />} onClick={() => (pickFile({
+                        accept: ".json",
+                        multiple: false
+                    }) as Promise<FileList>).then(list => list[0].text()).then(json => setBlocks(JSON.parse(json)))}>
+                        加载调色板
+                    </Button>
+                    <Button startIcon={<Save />} onClick={() => fileDownload(
+                        JSON.stringify(blocks),
+                        "palette.json"
+                    )}>
+                        保存调色板
+                    </Button>
+                </ButtonGroup>
+                <ButtonGroup variant="contained" fullWidth>
+                    <Button startIcon={<Download />} onClick={() => fileDownload(
+                        colorizer
+                            .replace("_def_", JSON.stringify(blocks.map(block => [
+                                block.id,
+                                block.color.r,
+                                block.color.g,
+                                block.color.b
+                            ].join(" "))))
+                            .replace("_allPossibleBlocks_", JSON.stringify(allPossibleBlocks)),
+                        "colorizer.js"
+                    )}>
+                        导出脚本
+                    </Button>
+                </ButtonGroup>
+            </Box>
         </Drawer>
     </>;
 };

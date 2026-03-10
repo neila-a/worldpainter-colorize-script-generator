@@ -23,6 +23,12 @@ importers:
       '@mui/material':
         specifier: ^7.3.9
         version: 7.3.9(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react@19.2.4))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      js-file-download:
+        specifier: ^0.4.12
+        version: 0.4.12
+      js-pick-file:
+        specifier: ^1.0.13
+        version: 1.0.13
       react:
         specifier: ^19.2.0
         version: 19.2.4
@@ -937,6 +943,12 @@ packages:
   isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
 
+  js-file-download@0.4.12:
+    resolution: {integrity: sha512-rML+NkoD08p5Dllpjo0ffy4jRHeY6Zsapvr/W86N7E0yuzAO6qa5X9+xog6zQNlH102J7IXljNY2FtS6Lj3ucg==}
+
+  js-pick-file@1.0.13:
+    resolution: {integrity: sha512-Gs9p53azbDVOwvwawkR7Z+R0R50mBXtc2A4bekRx67+ODIw51dlDaN6XXcTIJI3bw3xk6t4iPTapsRdYvQ9fTQ==}
+
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
@@ -1254,6 +1266,9 @@ packages:
     resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
     engines: {node: '>=14.17'}
     hasBin: true
+
+  underscore@1.13.8:
+    resolution: {integrity: sha512-DXtD3ZtEQzc7M8m4cXotyHR+FAS18C64asBYY5vqZexfYryNNnDc02W4hKg3rdQuqOYas1jkseX0+nZXjTXnvQ==}
 
   undici-types@7.16.0:
     resolution: {integrity: sha512-Zz+aZWSj8LE6zoxD+xrjh4VfkIG8Ya6LvYkZqtUQGJPZjYl53ypCaUwWqo7eI0x66KBGeRo+mlBEkMSeSZ38Nw==}
@@ -2226,6 +2241,12 @@ snapshots:
 
   isexe@2.0.0: {}
 
+  js-file-download@0.4.12: {}
+
+  js-pick-file@1.0.13:
+    dependencies:
+      underscore: 1.13.8
+
   js-tokens@4.0.0: {}
 
   js-yaml@4.1.1:
@@ -2500,6 +2521,8 @@ snapshots:
       - supports-color
 
   typescript@5.9.3: {}
+
+  underscore@1.13.8: {}
 
   undici-types@7.16.0: {}
 
