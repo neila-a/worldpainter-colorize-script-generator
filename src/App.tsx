@@ -22,6 +22,7 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import Delete from "@mui/icons-material/Delete";
 import Box from "@mui/material/Box";
+import Fab from "@mui/material/Fab";
 
 /**
  * It is an object because sometimes we need to change its ID without changing its color.
@@ -31,11 +32,14 @@ interface block {
     color: RgbColor;
 };
 
+const drawerWidth = 250;
+
 export default function App() {
     const [blocks, setBlocks] = useState<block[]>(defaultPalette);
     return <>
         <Grid container sx={{
-            p: 1
+            p: 1,
+            paddingRight: `${drawerWidth}px` // must use px or it will be dp
         }} rowSpacing={2} columnSpacing={2}>
             {blocks.map((block, index) => <Grid>
                 <Paper sx={{
@@ -70,26 +74,30 @@ export default function App() {
                 </Paper>
             </Grid>)}
         </Grid>
+        <Fab sx={{
+            position: "fixed",
+            bottom: 16,
+            right: 16 + 250
+        }} color="primary" onClick={() => setBlocks([...blocks, {
+            id: "Custom1",
+            color: {
+                r: 57,
+                g: 56,
+                b: 63
+            }
+        }])}>
+            <Add />
+        </Fab>
         <Drawer sx={{
-            height: 70,
+            width: 250,
             flexShrink: 0,
             "& .MuiDrawer-paper": {
-                height: 70,
+                width: 250,
                 p: 1,
                 boxSizing: "border-box"
             }
-        }} variant="permanent" anchor="bottom">
+        }} variant="permanent" anchor="right">
             <ButtonGroup variant="contained" fullWidth>
-                <Button startIcon={<Add />} onClick={() => setBlocks([...blocks, {
-                    id: "Mud",
-                    color: {
-                        r: 57,
-                        g: 56,
-                        b: 63
-                    }
-                }])}>
-                    添加方块
-                </Button>
                 <Button startIcon={<Download />} onClick={() => {
                     const blob = new Blob([
                         colorizer.replace("_def_", JSON.stringify(blocks.map(block => [
