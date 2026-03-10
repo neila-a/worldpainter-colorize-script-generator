@@ -29,6 +29,10 @@ import {
 import allPossibleBlocks from "./allPossibleBlocks.json";
 import colorizer from "./colorizer.js?raw";
 import defaultPalette from "./defaultPalette.json";
+import TextField from "@mui/material/TextField";
+import Search from "@mui/icons-material/Search";
+import InputAdornment from "@mui/material/InputAdornment";
+import Divider from "@mui/material/Divider";
 
 const drawerWidth = 250,
     white = {
@@ -41,28 +45,46 @@ export default function App() {
     const [palette, setPalette] = useState<Record<string, RgbColor>>(defaultPalette),
         [editing, setEditing] = useState<string | false>(false),
         [editingColor, setEditingColor] = useState<RgbColor>(white),
+        [searching, setSearching] = useState(""),
         closeDialog = () => setEditing(false);
     return <>
-        <List sx={{
+        <Box sx={{
             marginRight: `${drawerWidth}px` // must use px or it will be dp
         }}>
-            {allPossibleBlocks.map(id => {
-                const inPalette = Object.hasOwn(palette, id),
-                    color = inPalette ? palette[id] : white;
-                return <ListItem key={id} sx={{
-                    p: 1
-                }}>
-                    <ListItemButton sx={{
-                        bgcolor: `rgb(${color.r}, ${color.g}, ${color.b})`
-                    }} onClick={() => {
-                        setEditing(id);
-                        setEditingColor(color);
+            <Box sx={theme => ({
+                p: 1,
+                position: "sticky",
+                top: 0,
+                zIndex: 114514,
+                bgcolor: theme.palette.background.default
+            })}>
+                <TextField onChange={event => setSearching(event.target.value)} slotProps={{
+                    input: {
+                        startAdornment: <InputAdornment position="start">
+                            <Search />
+                        </InputAdornment>
+                    }
+                }} label="搜索" placeholder="方块ID" variant="outlined" fullWidth id="outlined-basic" />
+            </Box>
+            <List>
+                {allPossibleBlocks.filter(block => block.toLowerCase().includes(searching.toLowerCase())).map(id => {
+                    const inPalette = Object.hasOwn(palette, id),
+                        color = inPalette ? palette[id] : white;
+                    return <ListItem key={id} sx={{
+                        p: 1
                     }}>
-                        <ListItemText primary={id} secondary={inPalette ? <Fragment /> : "未指定"} />
-                    </ListItemButton>
-                </ListItem>;
-            })}
-        </List>
+                        <ListItemButton sx={{
+                            bgcolor: `rgb(${color.r}, ${color.g}, ${color.b})`
+                        }} onClick={() => {
+                            setEditing(id);
+                            setEditingColor(color);
+                        }}>
+                            <ListItemText primary={id} secondary={inPalette ? <Fragment /> : "未指定"} />
+                        </ListItemButton>
+                    </ListItem>;
+                })}
+            </List>
+        </Box>
         <Drawer sx={{
             width: drawerWidth,
             flexShrink: 0,
