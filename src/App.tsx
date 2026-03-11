@@ -1,38 +1,34 @@
+import {
+    type RGB
+} from "@ctrl/tinycolor/dist/interfaces";
 import Download from "@mui/icons-material/Download";
 import FileOpen from "@mui/icons-material/FileOpen";
 import Save from "@mui/icons-material/Save";
+import Search from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
 import Drawer from "@mui/material/Drawer";
+import InputAdornment from "@mui/material/InputAdornment";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import TextField from "@mui/material/TextField";
 import fileDownload from "js-file-download";
 import {
     pickFile
     // @ts-expect-error js-pick-file don't have types or DefinitelyTyped.
 } from "js-pick-file";
 import {
+    MuiColorInput
+} from "mui-color-input";
+import {
     Fragment,
     useState
 } from "react";
-import {
-    RgbColorPicker,
-    type RgbColor
-} from "react-colorful";
 import allPossibleBlocks from "./allPossibleBlocks.json";
 import colorizer from "./colorizer.js?raw";
 import defaultPalette from "./defaultPalette.json";
-import TextField from "@mui/material/TextField";
-import Search from "@mui/icons-material/Search";
-import InputAdornment from "@mui/material/InputAdornment";
-import Divider from "@mui/material/Divider";
 
 const drawerWidth = 250,
     white = {
@@ -42,11 +38,8 @@ const drawerWidth = 250,
     } as const;
 
 export default function App() {
-    const [palette, setPalette] = useState<Record<string, RgbColor>>(defaultPalette),
-        [editing, setEditing] = useState<string | false>(false),
-        [editingColor, setEditingColor] = useState<RgbColor>(white),
-        [searching, setSearching] = useState(""),
-        closeDialog = () => setEditing(false);
+    const [palette, setPalette] = useState<Record<string, RGB>>(defaultPalette),
+        [searching, setSearching] = useState("");
     return <>
         <Box sx={{
             marginRight: `${drawerWidth}px` // must use px or it will be dp
@@ -55,7 +48,7 @@ export default function App() {
                 p: 1,
                 position: "sticky",
                 top: 0,
-                zIndex: 114514,
+                zIndex: 1300 - 1, // Dialog zIndex = 1300
                 bgcolor: theme.palette.background.default
             })}>
                 <TextField onChange={event => setSearching(event.target.value)} slotProps={{
@@ -71,16 +64,21 @@ export default function App() {
                     const inPalette = Object.hasOwn(palette, id),
                         color = inPalette ? palette[id] : white;
                     return <ListItem key={id} sx={{
-                        p: 1
-                    }}>
-                        <ListItemButton sx={{
-                            bgcolor: `rgb(${color.r}, ${color.g}, ${color.b})`
-                        }} onClick={() => {
-                            setEditing(id);
-                            setEditingColor(color);
-                        }}>
-                            <ListItemText primary={id} secondary={inPalette ? <Fragment /> : "未指定"} />
-                        </ListItemButton>
+                        p: 1,
+                        minHeight: 72, // MuiColorInput height = 56
+                        bgcolor: `rgb(${color.r}, ${color.g}, ${color.b})`
+                    }} secondaryAction={<MuiColorInput value={color} onChange={RGBstring => {
+                        const colors = RGBstring.replace("rgb(", "").replace(")", "").split(", ");
+                        setPalette(oldPalette => ({
+                            ...oldPalette,
+                            [id]: {
+                                r: colors[0],
+                                g: colors[1],
+                                b: colors[2]
+                            }
+                        }));
+                    }} />}>
+                        <ListItemText primary={id} secondary={inPalette ? <Fragment /> : "未指定"} />
                     </ListItem>;
                 })}
             </List>
@@ -131,28 +129,5 @@ export default function App() {
                 </ButtonGroup>
             </Box>
         </Drawer>
-
-        <Dialog maxWidth="xs" open={editing !== false} keepMounted onClose={closeDialog}>
-            <DialogTitle>
-                编辑{editing}的颜色
-            </DialogTitle>
-            <DialogContent dividers>
-                {editing !== false && <RgbColorPicker color={editingColor} onChange={newColor => setEditingColor(newColor)} />}
-            </DialogContent>
-            <DialogActions>
-                <Button autoFocus onClick={closeDialog}>
-                    取消
-                </Button>
-                {editing !== false && <Button onClick={() => {
-                    setPalette(oldPalette => ({
-                        ...oldPalette,
-                        [editing]: editingColor
-                    }));
-                    closeDialog();
-                }}>
-                    确定
-                </Button>}
-            </DialogActions>
-        </Dialog>
     </>;
 };
