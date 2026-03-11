@@ -31,6 +31,10 @@ import {
 import allPossibleBlocks from "./allPossibleBlocks.json";
 import colorizer from "./colorizer.js?raw";
 import defaultPalette from "./defaultPalette.json";
+import {
+    createTheme,
+    ThemeProvider
+} from "@mui/material/styles";
 
 const drawerWidth = 250,
     white = {
@@ -44,13 +48,13 @@ export default function App() {
         [searching, setSearching] = useState("");
     return <>
         <Box sx={{
-            marginRight: `${drawerWidth}px` // must use px or it will be dp
+            marginRight: `${drawerWidth}px` // must use px or it will be (drawerWidth * 8)px
         }}>
             <Box sx={theme => ({
                 p: 1,
                 position: "sticky",
                 top: 0,
-                zIndex: 1300 - 1, // Dialog zIndex = 1300
+                zIndex: theme.zIndex.modal - 1,
                 bgcolor: theme.palette.background.default
             })}>
                 <TextField onChange={event => setSearching(event.target.value)} slotProps={{
@@ -65,32 +69,41 @@ export default function App() {
                 {allPossibleBlocks.filter(block => block.toLowerCase().includes(searching.toLowerCase())).map(id => {
                     const inPalette = Object.hasOwn(palette, id),
                         color = inPalette ? palette[id] : white;
-                    return <ListItem key={id} sx={{
-                        p: 1,
-                        minHeight: 72, // MuiColorInput height = 56
-                        bgcolor: `rgb(${color.r}, ${color.g}, ${color.b})`
-                    }} secondaryAction={<Box sx={{
-                        display: "flex"
-                    }}>
-                        <MuiColorInput value={color} onChange={RGBstring => {
-                            const colors = RGBstring.replace("rgb(", "").replace(")", "").split(", ");
-                            setPalette(oldPalette => ({
-                                ...oldPalette,
-                                [id]: {
-                                    r: colors[0],
-                                    g: colors[1],
-                                    b: colors[2]
-                                }
-                            }));
-                        }} />
-                        <IconButton onClick={() => setPalette(oldPalette => Object.fromEntries(
-                            Object.entries(oldPalette).filter(([blockID]) => blockID !== id)
-                        ))}>
-                            <Restore />
-                        </IconButton>
-                    </Box>}>
-                        <ListItemText primary={id} secondary={inPalette ? <Fragment /> : "未指定"} />
-                    </ListItem>;
+                    return <ThemeProvider theme={createTheme({
+                        palette: {
+                            primary: {
+                                main: `rgb(${color.r}, ${color.g}, ${color.b})`
+                            }
+                        }
+                    })}>
+                        <ListItem key={id} sx={theme => ({
+                            p: 1,
+                            minHeight: theme.spacing(7 + 2), // MuiColorInput height = 7 * 8px
+                            bgcolor: theme.palette.primary.main,
+                            color: theme.palette.primary.contrastText
+                        })} secondaryAction={<Box sx={{
+                            display: "flex"
+                        }}>
+                            <MuiColorInput value={color} onChange={RGBstring => {
+                                const colors = RGBstring.replace("rgb(", "").replace(")", "").split(", ");
+                                setPalette(oldPalette => ({
+                                    ...oldPalette,
+                                    [id]: {
+                                        r: colors[0],
+                                        g: colors[1],
+                                        b: colors[2]
+                                    }
+                                }));
+                            }} />
+                            <IconButton onClick={() => setPalette(oldPalette => Object.fromEntries(
+                                Object.entries(oldPalette).filter(([blockID]) => blockID !== id)
+                            ))}>
+                                <Restore />
+                            </IconButton>
+                        </Box>}>
+                            <ListItemText primary={id} secondary={inPalette ? <Fragment /> : "未指定"} />
+                        </ListItem>
+                    </ThemeProvider>;
                 })}
             </List>
         </Box>
@@ -103,7 +116,7 @@ export default function App() {
             }
         }} variant="permanent" anchor="right">
             <Box sx={{
-                bottom: "0",
+                bottom: 0,
                 position: "fixed",
                 p: 1
             }}>
