@@ -3,12 +3,14 @@ import {
 } from "@ctrl/tinycolor/dist/interfaces";
 import Download from "@mui/icons-material/Download";
 import FileOpen from "@mui/icons-material/FileOpen";
+import Restore from "@mui/icons-material/Restore";
 import Save from "@mui/icons-material/Save";
 import Search from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -67,17 +69,26 @@ export default function App() {
                         p: 1,
                         minHeight: 72, // MuiColorInput height = 56
                         bgcolor: `rgb(${color.r}, ${color.g}, ${color.b})`
-                    }} secondaryAction={<MuiColorInput value={color} onChange={RGBstring => {
-                        const colors = RGBstring.replace("rgb(", "").replace(")", "").split(", ");
-                        setPalette(oldPalette => ({
-                            ...oldPalette,
-                            [id]: {
-                                r: colors[0],
-                                g: colors[1],
-                                b: colors[2]
-                            }
-                        }));
-                    }} />}>
+                    }} secondaryAction={<Box sx={{
+                        display: "flex"
+                    }}>
+                        <MuiColorInput value={color} onChange={RGBstring => {
+                            const colors = RGBstring.replace("rgb(", "").replace(")", "").split(", ");
+                            setPalette(oldPalette => ({
+                                ...oldPalette,
+                                [id]: {
+                                    r: colors[0],
+                                    g: colors[1],
+                                    b: colors[2]
+                                }
+                            }));
+                        }} />
+                        <IconButton onClick={() => setPalette(oldPalette => Object.fromEntries(
+                            Object.entries(oldPalette).filter(([blockID]) => blockID !== id)
+                        ))}>
+                            <Restore />
+                        </IconButton>
+                    </Box>}>
                         <ListItemText primary={id} secondary={inPalette ? <Fragment /> : "未指定"} />
                     </ListItem>;
                 })}
