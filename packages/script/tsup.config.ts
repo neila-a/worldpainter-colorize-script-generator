@@ -14,7 +14,6 @@ export default defineConfig({
     minify: false,
     clean: true,
     esbuildOptions(options) {
-        console.log(readFileSync(import.meta.dirname + "/src/metadata.ts").toString());
         options.banner = {
             js: readFileSync(import.meta.dirname + "/src/metadata.ts").toString()
         };
