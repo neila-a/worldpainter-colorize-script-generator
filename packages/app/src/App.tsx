@@ -17,6 +17,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import TextField from "@mui/material/TextField";
 import fileDownload from "js-file-download";
+import colorizer from "../../script/dist/index.cjs?raw"; // Must directly write the path because it isn't a module.
 import {
     pickFile
     // @ts-expect-error js-pick-file don't have types or DefinitelyTyped.
@@ -42,6 +43,14 @@ const drawerWidth = 250,
         g: 255,
         b: 255
     } as const;
+
+export interface colorizerDefines {
+    allPossibleBlocks: string[];
+    /**  
+     * @type Array<"block r g b">
+     */
+    def: string[];
+}
 
 export default function App() {
     const [palette, setPalette] = useState<Record<string, RGB>>(defaultPalette),
@@ -137,15 +146,20 @@ export default function App() {
                     </Button>
                 </ButtonGroup>
                 <ButtonGroup variant="contained" fullWidth>
-                    <Button startIcon={<Download />} onClick={() => getColorizer({
-                        allPossibleBlocks,
-                        def: Object.entries(palette).map(([id, color]) => [
-                            id,
-                            color.r,
-                            color.g,
-                            color.b
-                        ].join(" "))
-                    }).then(colorizer => fileDownload(colorizer, "colorizer.js"))}>
+                    <Button startIcon={<Download />} onClick={() => fileDownload(
+                        colorizer
+                            .replaceAll("defines", JSON.stringify({
+                                allPossibleBlocks,
+                                def: Object.entries(palette).map(([id, color]) => [
+                                    id,
+                                    color.r,
+                                    color.g,
+                                    color.b
+                                ].join(" "))
+                            } as colorizerDefines))
+                            .replace("\"use strict\";", ""),
+                        "colorizer.js"
+                    )}>
                         导出脚本
                     </Button>
                 </ButtonGroup>

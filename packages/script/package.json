@@ -1,0 +1,19 @@
+{
+  "name": "@worldpainter-colorize-script-generator/script",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "types": "./index.d.ts",
+    "import": "./dist/colorizer.js",
+    "require": "./dist/colorizer.umd.cjs"
+  },
+  "devDependencies": {
+    "@swc/core": "^1.15.18",
+    "@worldpainter-colorize-script-generator/app": "workspace:*",
+    "tsup": "^8.5.1"
+  },
+  "scripts": {
+    "build": "tsup"
+  }
+}

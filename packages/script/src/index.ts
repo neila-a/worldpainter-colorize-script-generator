@@ -9,7 +9,7 @@
 
 import {
     type colorizerDefines
-} from ".";
+} from "@worldpainter-colorize-script-generator/app/src/App";
 import distanceBetween from "./distanceBetween";
 import truncate from "./truncate";
 
