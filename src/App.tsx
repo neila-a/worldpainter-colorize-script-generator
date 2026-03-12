@@ -29,12 +29,12 @@ import {
     useState
 } from "react";
 import allPossibleBlocks from "./allPossibleBlocks.json";
-import colorizer from "./colorizer.js?raw";
 import defaultPalette from "./defaultPalette.json";
 import {
     createTheme,
     ThemeProvider
 } from "@mui/material/styles";
+import getColorizer from "./colorizer";
 
 const drawerWidth = 250,
     white = {
@@ -137,17 +137,15 @@ export default function App() {
                     </Button>
                 </ButtonGroup>
                 <ButtonGroup variant="contained" fullWidth>
-                    <Button startIcon={<Download />} onClick={() => fileDownload(
-                        colorizer
-                            .replace("_def_", JSON.stringify(Object.entries(palette).map(([id, color]) => [
-                                id,
-                                color.r,
-                                color.g,
-                                color.b
-                            ].join(" "))))
-                            .replace("_allPossibleBlocks_", JSON.stringify(allPossibleBlocks)),
-                        "colorizer.js"
-                    )}>
+                    <Button startIcon={<Download />} onClick={() => getColorizer({
+                        allPossibleBlocks,
+                        def: Object.entries(palette).map(([id, color]) => [
+                            id,
+                            color.r,
+                            color.g,
+                            color.b
+                        ].join(" "))
+                    }).then(colorizer => fileDownload(colorizer, "colorizer.js"))}>
                         导出脚本
                     </Button>
                 </ButtonGroup>
