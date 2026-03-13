@@ -35,7 +35,6 @@ import {
     createTheme,
     ThemeProvider
 } from "@mui/material/styles";
-import getColorizer from "./colorizer";
 
 const drawerWidth = 250,
     white = {
@@ -45,11 +44,9 @@ const drawerWidth = 250,
     } as const;
 
 export interface colorizerDefines {
-    allPossibleBlocks: string[];
-    /**  
-     * @type Array<"block r g b">
-     */
-    def: string[];
+    palette: Record<string, {
+        [key in keyof RGB]: Exclude<RGB[key], string>;
+    }>;
 }
 
 export default function App() {
@@ -149,13 +146,10 @@ export default function App() {
                     <Button startIcon={<Download />} onClick={() => fileDownload(
                         colorizer
                             .replaceAll("defines", JSON.stringify({
-                                allPossibleBlocks,
-                                def: Object.entries(palette).map(([id, color]) => [
-                                    id,
-                                    color.r,
-                                    color.g,
-                                    color.b
-                                ].join(" "))
+                                palette: Object.fromEntries(Object.entries(palette).map(([id, color]) => [
+                                    allPossibleBlocks.indexOf(id),
+                                    Object.fromEntries(Object.entries(color).map(([key, value]) => [key, parseInt(value)]))
+                                ]))
                             } as colorizerDefines))
                             .replace("\"use strict\";", ""),
                         "colorizer.js"

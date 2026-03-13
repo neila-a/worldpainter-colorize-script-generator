@@ -12,6 +12,7 @@ import {
 } from "@worldpainter-colorize-script-generator/app/src/App";
 import distanceBetween from "./distanceBetween";
 import truncate from "./truncate";
+import "core-js/actual/object/entries";
 
 declare const dimension: any,
     params: Record<string, any>,
@@ -28,18 +29,9 @@ const yDefault = dimension.getExtent().getY() * 128 + params["yOffset"];
 
 print("Script by ctRy");
 
-const terrainArr = defines.allPossibleBlocks;
-
-const palette = [];
-
-const def = defines.def;
-
-for (let i = 0; i < def.length; i++) {
-    const val = def[i].split(" ");
-    palette.push({
-        t: terrainArr.indexOf(val[0]), r: parseInt(val[1]), g: parseInt(val[2]), b: parseInt(val[3])
-    });
-}
+const {
+    palette
+} = defines;
 
 const coloringMap = wp.getHeightMap().fromFile(arguments[0]).go();
 let mask = coloringMap;
@@ -77,20 +69,20 @@ for (let x = extent.getX(); x < extent.getWidth(); x++) {
         if (color.getAlpha() < 128)
             continue;
 
-        let distance = 999999;
-        let index = -1;
-        for (let i = 0; i < palette.length; i++) {
-            const tempDistance = distanceBetween(color.getRed(), color.getGreen(), color.getBlue(), palette[i].r, palette[i].g, palette[i].b);
-            if (tempDistance < distance) {
-                distance = tempDistance;
-                index = i;
-            }
+        type distanceCalculationResult = [id: string, distance: number];
+        const calculateDistance = (index: string) => distanceBetween(color.getRed(), color.getGreen(), color.getBlue(), palette[index].r, palette[index].g, palette[index].b),
+            {
+                0: index
+            } = Object.entries(palette).reduce((previous, current) => {
+                const id = current[0];
+                const currentDistance = calculateDistance(id);
+                if (currentDistance < previous[1]) {
+                    return [id, currentDistance] as distanceCalculationResult;
+                }
+                return previous;
+            }, ["1" /* BareGrass */, calculateDistance("1")] as distanceCalculationResult);
 
-            if (distance == 0)
-                break;
-        }
-
-        dimension.setTerrainAt(x + xDefault, y + yDefault, org.pepsoft.worldpainter.Terrain.VALUES[palette[index].t]);
+        dimension.setTerrainAt(x + xDefault, y + yDefault, org.pepsoft.worldpainter.Terrain.VALUES[parseInt(index)]);
     }
 }
 

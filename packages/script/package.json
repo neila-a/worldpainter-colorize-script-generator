@@ -11,9 +11,11 @@
   "devDependencies": {
     "@swc/core": "^1.15.18",
     "@worldpainter-colorize-script-generator/app": "workspace:*",
+    "core-js": "^3.48.0",
+    "tsno": "^2.0.0",
     "tsup": "^8.5.1"
   },
   "scripts": {
-    "build": "tsup"
+    "build": "tsno run build.ts"
   }
 }

@@ -1,17 +1,19 @@
 import {
-    readFileSync
+    readFileSync,
+    writeFileSync
 } from "node:fs";
 import {
-    defineConfig
+    build
 } from "tsup";
 
-export default defineConfig({
+await build({
     entry: ["src/index.ts"],
     splitting: false,
     sourcemap: false,
     target: "es5",
     // We need to keep metadata so do not minify.
     minify: false,
+    treeshake: true,
     clean: true,
     esbuildOptions(options) {
         options.banner = {
@@ -19,3 +21,8 @@ export default defineConfig({
         };
     }
 });
+const builtFilePath = import.meta.dirname + "/dist/index.cjs";
+writeFileSync(builtFilePath, [
+    import.meta.dirname + "/src/metadata.ts", 
+    builtFilePath
+].map(path => readFileSync(path).toString()).join("\n"));
