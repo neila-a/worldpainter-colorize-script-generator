@@ -1,4 +1,4 @@
-[
+const allPossibleBlocks: string[] = [
     "Grass",
     "BareGrass",
     "Dirt",
@@ -160,4 +160,5 @@
     "Mud",
     "Bare_Beaches",
     "Moss"
-]
+];
+export default allPossibleBlocks;

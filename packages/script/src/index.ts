@@ -20,7 +20,7 @@ declare const dimension: any,
         xOffset: number;
         yOffset: number;
         colorizeImage: string;
-        mask: string | undefined;
+        mask: string | false;
     },
     print: (info: string) => void,
     defines: colorizerDefines,
@@ -47,7 +47,7 @@ for (let i = 0; i < def.length; i++) {
 }
 
 const coloringMap = wp.getHeightMap().fromFile(params.colorizeImage).go(),
-    mask = params["mask"] === null ? undefined : wp.getHeightMap().fromFile(params.mask).go();
+    mask = params["mask"] === undefined ? false : wp.getHeightMap().fromFile(params.mask).go();
 
 const extent = coloringMap.getExtent();
 print("\nImage's upper left pixel will be placed in the coordinate (x: " + xDefault + ", y: " + yDefault + ").");

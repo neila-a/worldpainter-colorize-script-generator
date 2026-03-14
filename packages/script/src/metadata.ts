@@ -1,6 +1,6 @@
 // Metadata - Must be comments!
 // script.description=Converts RGB images to minecraft blocks. The top left corner of the image will be placed in the top left corner of the map.
-
+// script.hideCmdLineParams=true
 
 // Offsets
 

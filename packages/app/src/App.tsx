@@ -17,7 +17,11 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import TextField from "@mui/material/TextField";
 import fileDownload from "js-file-download";
-import colorizer from "../../script/dist/index.cjs?raw"; // Must directly write the path because it isn't a module.
+import {
+    createTheme,
+    ThemeProvider
+} from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import {
     pickFile
     // @ts-expect-error js-pick-file don't have types or DefinitelyTyped.
@@ -29,20 +33,19 @@ import {
     Fragment,
     useState
 } from "react";
-import allPossibleBlocks from "./allPossibleBlocks.json";
-import defaultPalette from "./defaultPalette.json";
-import {
-    createTheme,
-    ThemeProvider
-} from "@mui/material/styles";
-import getColorizer from "./colorizer";
+// @ts-expect-error raw import by vite
+import colorizer from "../../script/dist/index.cjs?raw"; // Must directly write the path because it isn't a module.
+import allPossibleBlocks from "./data/allPossibleBlocks";
+import defaultPalette, {
+    palette
+} from "./data/defaultPalette";
 
 const drawerWidth = 250,
     white = {
         r: 255,
         g: 255,
         b: 255
-    } as const;
+    } as RGB;
 
 export interface colorizerDefines {
     allPossibleBlocks: string[];
@@ -53,7 +56,7 @@ export interface colorizerDefines {
 }
 
 export default function App() {
-    const [palette, setPalette] = useState<Record<string, RGB>>(defaultPalette),
+    const [palette, setPalette] = useState<palette>(defaultPalette),
         [searching, setSearching] = useState("");
     return <>
         <Box sx={{
@@ -124,6 +127,16 @@ export default function App() {
                 boxSizing: "border-box"
             }
         }} variant="permanent" anchor="right">
+            <Box sx={{
+                p: 1
+            }}>
+                <Typography variant="h4">
+                    已选择
+                </Typography>
+                <Typography>
+                    {Object.keys(palette).length}个方块
+                </Typography>
+            </Box>
             <Box sx={{
                 bottom: 0,
                 position: "fixed",
