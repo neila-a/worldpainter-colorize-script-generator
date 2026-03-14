@@ -7,6 +7,8 @@
 // mask
 // repeat
 
+// APIs higher than ES3 cannot be used, but new syntax can be employed.
+
 import {
     type colorizerDefines
 } from "@worldpainter-colorize-script-generator/app/src/App";
@@ -14,17 +16,20 @@ import distanceBetween from "./distanceBetween";
 import truncate from "./truncate";
 
 declare const dimension: any,
-    params: Record<string, any>,
+    params: {
+        xOffset: number;
+        yOffset: number;
+        colorizeImage: string;
+        mask: string | undefined;
+    },
     print: (info: string) => void,
     defines: colorizerDefines,
-    // @ts-expect-error WP environment
-    arguments: string[],
     java: any,
     org: any,
     wp: any;
 
-const xDefault = dimension.getExtent().getX() * 128 + params["xOffset"];
-const yDefault = dimension.getExtent().getY() * 128 + params["yOffset"];
+const xDefault = dimension.getExtent().getX() * 128 + params.xOffset;
+const yDefault = dimension.getExtent().getY() * 128 + params.yOffset;
 
 print("Script by ctRy");
 
@@ -41,22 +46,8 @@ for (let i = 0; i < def.length; i++) {
     });
 }
 
-const coloringMap = wp.getHeightMap().fromFile(arguments[0]).go();
-let mask = coloringMap;
-
-if (arguments.length > 2) {
-    for (let i = 2; i < arguments.length; i++) {
-        if (arguments[i] == "")
-            break;
-
-        if (arguments[i].indexOf("mask: ") == 0) {
-            mask = wp.getHeightMap().fromFile(arguments[i].substring(6).trim()).go();
-
-            print("\nMask detected");
-            print(arguments[i].substring(6).trim());
-        }
-    }
-}
+const coloringMap = wp.getHeightMap().fromFile(params.colorizeImage).go(),
+    mask = params["mask"] === null ? undefined : wp.getHeightMap().fromFile(params.mask).go();
 
 const extent = coloringMap.getExtent();
 print("\nImage's upper left pixel will be placed in the coordinate (x: " + xDefault + ", y: " + yDefault + ").");
@@ -69,7 +60,7 @@ for (let x = extent.getX(); x < extent.getWidth(); x++) {
         if (!dimension.isTilePresent(truncate((x + xDefault) / 128.0), truncate((y + yDefault) / 128.0)))
             continue;
 
-        if (mask !== coloringMap && mask.getHeight(x, y) < 128)
+        if (mask !== false && mask.getHeight(x, y) < 128)
             continue;
 
         const color = new java.awt.Color(coloringMap.getColour(x, y), java.lang.Boolean.TRUE);
