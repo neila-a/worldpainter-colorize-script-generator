@@ -1,3 +1,6 @@
+> [!IMPORTANT]  
+> Due to my discovery of such an excellent project as https://github.com/ALingll/worldpainter-plugin-colorzier, this project will no longer be updated.
+
 # WorldPainter Colorize Script Generator
 
 English | [中文普通话大陆简体](./docs/README.cmn-Hans-CN.md)

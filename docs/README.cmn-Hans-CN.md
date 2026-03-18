@@ -1,3 +1,6 @@
+> [!IMPORTANT]  
+> 由于我看到了 https://github.com/ALingll/worldpainter-plugin-colorzier 这样优秀的项目，本项目将停止更新。
+
 # WorldPainter上色脚本生成器
 
 [English](../README.md) | 中文普通话大陆简体
